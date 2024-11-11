@@ -4,11 +4,16 @@
  */
 package controlador;
 
+import com.fernandowirtz.relojdigital.Alarma;
 import com.fernandowirtz.relojdigital.ModeloReloj;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import javax.swing.DefaultListModel;
 import javax.swing.Timer;
 import vista.Reloj;
+import vista.RelojPane;
 
 /**
  *
@@ -18,21 +23,28 @@ public class ControladorReloj {
 
     public ModeloReloj modelo;
 
-    public Reloj vista;
+    public RelojPane vista;
     
     private Timer timer;
+    
+    static DefaultListModel modeloAlarmas= new DefaultListModel() ;
 
-    public ControladorReloj(ModeloReloj modelo, Reloj vista) {
+    public ControladorReloj(ModeloReloj modelo, RelojPane vista) {
 
         this.modelo = modelo;
 
         this.vista = vista;
 
+        vista.getjLAlarmas().setModel(modeloAlarmas);
+        
         vista.getBtnFormato().addActionListener(e -> setFormato24H());
 
         vista.getBtnFecha().addActionListener(e -> setFechaVisible());
         
         vista.getBtnAñadirAlarma().addActionListener(e -> setAlarma() );
+        
+        
+        
         
         iniciarReloj();
 
@@ -52,22 +64,46 @@ public class ControladorReloj {
     
     private void setAlarma(){
         
+        try{
+        
        String fecha=vista.getTxtFecha().getText();
        
        String hora=vista.getTxtHora().getText();
        
        String mensaje=vista.getTxtMensaje().getText();
        
-       //fecha.
        
+       String fecha_hora=fecha+" "+hora;
        
+       //java.time.format.DateTimeParseException
        
+//       LocalDate fechaLD=LocalDate.parse(fecha);
+//       
+//       
+      DateTimeFormatter formateador= DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+//       
+       LocalDateTime momento= LocalDateTime.parse(fecha_hora, formateador);
       
        
-      // Alarma alarma= new Alarma()
+       
+      Alarma alarma= new Alarma(momento, mensaje);
         
         
-       // modelo.agregarAlarma(alarma);
+        modelo.agregarAlarma(alarma);
+        
+        
+        }catch(DateTimeParseException ex){
+            
+            System.out.println("Error en el formato de la alarma");
+            
+            vista.getTxtFecha().setText("yyyy-MM-dd");
+            
+             vista.getTxtHora().setText("HH:mm");
+            
+            
+        }
+        
+        
         
     }
     
@@ -80,6 +116,8 @@ public class ControladorReloj {
             actualizarVista(fechaActual);
             verificarAlarmas(fechaActual);
         });
+        
+        
         
         timer.start();
         

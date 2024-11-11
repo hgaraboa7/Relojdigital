@@ -1,12 +1,11 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package vista;
 
 import com.fernandowirtz.relojdigital.ModeloReloj;
 import controlador.ControladorReloj;
-import java.time.LocalDateTime;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JTextArea;
@@ -14,20 +13,19 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author hecto
+ * @author hector.garaboacasas
  */
-public class Reloj extends javax.swing.JFrame {
+public class RelojPane extends javax.swing.JPanel {
 
     /**
-     * Creates new form Reloj
+     * Creates new form RelojPane
      */
-    public Reloj() {
-        initComponents();
+    public RelojPane() {
+         initComponents();
 
         ModeloReloj modelo=new ModeloReloj();
         
-       // new ControladorReloj(modelo, this);
-        
+        new ControladorReloj(modelo, this);
     }
 
     /**
@@ -39,6 +37,12 @@ public class Reloj extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtMensaje = new javax.swing.JTextArea();
+        btnAñadirAlarma = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jLAlarmas = new javax.swing.JList<>();
+        btnEliminarAlarma = new javax.swing.JButton();
         lblFecha = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
         btnFormato = new javax.swing.JButton();
@@ -48,14 +52,21 @@ public class Reloj extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtFecha = new javax.swing.JTextField();
         txtHora = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtMensaje = new javax.swing.JTextArea();
-        btnAñadirAlarma = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jLAlarmas = new javax.swing.JList<>();
-        btnEliminarAlarma = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        txtMensaje.setColumns(20);
+        txtMensaje.setRows(5);
+        jScrollPane1.setViewportView(txtMensaje);
+
+        btnAñadirAlarma.setText("Añadir alarma");
+        btnAñadirAlarma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAñadirAlarmaActionPerformed(evt);
+            }
+        });
+
+        jScrollPane2.setViewportView(jLAlarmas);
+
+        btnEliminarAlarma.setText("Eliminar Alarma");
 
         lblFecha.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -80,23 +91,8 @@ public class Reloj extends javax.swing.JFrame {
 
         txtHora.setText("HH:mm");
 
-        txtMensaje.setColumns(20);
-        txtMensaje.setRows(5);
-        jScrollPane1.setViewportView(txtMensaje);
-
-        btnAñadirAlarma.setText("Añadir alarma");
-        btnAñadirAlarma.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAñadirAlarmaActionPerformed(evt);
-            }
-        });
-
-        jScrollPane2.setViewportView(jLAlarmas);
-
-        btnEliminarAlarma.setText("Eliminar Alarma");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -170,62 +166,25 @@ public class Reloj extends javax.swing.JFrame {
                             .addComponent(btnFecha))))
                 .addGap(8, 8, 8)
                 .addComponent(btnAñadirAlarma)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAñadirAlarmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirAlarmaActionPerformed
+
+    }//GEN-LAST:event_btnAñadirAlarmaActionPerformed
 
     private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFechaActionPerformed
 
-    private void btnAñadirAlarmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirAlarmaActionPerformed
-        
-        
-    }//GEN-LAST:event_btnAñadirAlarmaActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Reloj.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Reloj.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Reloj.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Reloj.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Reloj().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAñadirAlarma;
     private javax.swing.JButton btnEliminarAlarma;
     private javax.swing.JButton btnFecha;
     private javax.swing.JButton btnFormato;
-    private javax.swing.JList<String> jLAlarmas;
+    private javax.swing.JList<Alarma> jLAlarmas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -238,7 +197,8 @@ public class Reloj extends javax.swing.JFrame {
     private javax.swing.JTextArea txtMensaje;
     // End of variables declaration//GEN-END:variables
 
-    public void actualizarHora(String hora) {
+
+public void actualizarHora(String hora) {
 
         lblHora.setText(hora);
 
@@ -280,9 +240,6 @@ public class Reloj extends javax.swing.JFrame {
     public JList<String> getjLAlarmas() {
         return jLAlarmas;
     }
-    
-    
-    
     
 
 }

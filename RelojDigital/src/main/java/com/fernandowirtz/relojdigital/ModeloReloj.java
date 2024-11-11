@@ -65,10 +65,16 @@ public class ModeloReloj {
         return alarmas;
     }
     
-    public void agregarAlarma(Alarma alarma){
+    public void agregarAlarma(Alarma alarma ){
         
         if(alarma.futura()){
          alarmas.add(alarma);
+         
+         //modeloAlarmas.addElement(new Alarma(momento, mensaje));
+         
+            System.out.println(alarma.toString());
+        }else{
+            System.out.println("Alarma en fecha/hora ya pasada");
         }
     }
     

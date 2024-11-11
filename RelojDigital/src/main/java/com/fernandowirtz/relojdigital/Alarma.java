@@ -47,6 +47,11 @@ public class Alarma {
         
         
     }
+
+    @Override
+    public String toString() {
+        return "Alarma{" + "momento=" + momento + ", mensaje=" + mensaje + '}';
+    }
     
     
     

@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import javax.swing.DefaultListModel;
 import javax.swing.Timer;
-import vista.Reloj;
+
 import vista.RelojPane;
 
 /**
@@ -136,7 +136,7 @@ public class ControladorReloj {
             Alarma alarma = modeloAlarmas.get(i);
             if (alarma.sonarAlarma(fechaActual)) {
                 System.out.println(alarma.getMensaje());
-
+            eliminarAlarma();
             }
         }
 

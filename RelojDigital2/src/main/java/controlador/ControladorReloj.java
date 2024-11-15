@@ -6,11 +6,13 @@ package controlador;
 
 import com.fernandowirtz.relojdigital.Alarma;
 import com.fernandowirtz.relojdigital.ModeloReloj;
+import java.awt.Color;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 import vista.RelojPane;
@@ -32,28 +34,63 @@ public class ControladorReloj {
         this.modelo = modelo;
 
         this.vista = vista;
+//vista.getBtnFormato().addActionListener(e -> setFormato24H());
+        //vista.getBtnFecha().addActionListener(e -> setFechaVisible());
 
-        vista.getBtnFormato().addActionListener(e -> setFormato24H());
+        vista.getTbtnFormato().addActionListener(e -> setFormato24H());
 
-        vista.getBtnFecha().addActionListener(e -> setFechaVisible());
+        vista.getTbtnFecha().addActionListener(e -> setFechaVisible());
 
         vista.getBtnAñadirAlarma().addActionListener(e -> setAlarma());
 
         vista.getBtnEliminarAlarma().addActionListener(e -> eliminarAlarma());
+        
+        vista.getBtnDialogAlarma().addActionListener(e-> abridDialogAlarma());
+        
+        vista.getBtnDialogLista().addActionListener(e-> abridDialogLista());
 
         iniciarReloj();
 
     }
 
+//    private void setFormato24H() {
+//        
+//        modelo.setFormato24h(!modelo.isFormato24h());
+//
+//    }
     private void setFormato24H() {
 
-        modelo.setFormato24h(!modelo.isFormato24h());
+        if (vista.getTbtnFormato().isSelected()) {
+            
+            vista.getTbtnFormato().setBackground(Color.red);
+            
+
+            modelo.setFormato24h(!modelo.isFormato24h());
+
+        } else if (!vista.getTbtnFormato().isSelected()) {
+            
+            vista.getTbtnFormato().setBackground(Color.green);
+            
+            
+            modelo.setFormato24h(!modelo.isFormato24h());
+        }
 
     }
 
     private void setFechaVisible() {
 
-        modelo.setFechaVisible(!modelo.isFechaVisible());
+        if (vista.getTbtnFecha().isSelected()) {
+            
+              vista.getTbtnFecha().setBackground(Color.red);
+
+            modelo.setFechaVisible(!modelo.isFechaVisible());
+
+        } else if (!vista.getTbtnFecha().isSelected()) {
+            
+            vista.getTbtnFecha().setBackground(Color.green);
+            
+            modelo.setFechaVisible(!modelo.isFechaVisible());
+        }
 
     }
 
@@ -136,7 +173,14 @@ public class ControladorReloj {
             Alarma alarma = modeloAlarmas.get(i);
             if (alarma.sonarAlarma(fechaActual)) {
                 System.out.println(alarma.getMensaje());
-            eliminarAlarma();
+                int opcion = JOptionPane.showConfirmDialog(null, alarma.getMensaje() + "\n" + "  ¿Eliminar alarma?", "Alarma sonando", JOptionPane.YES_OPTION);
+
+                if (opcion == JOptionPane.YES_OPTION) {
+
+                    modelo.eliminarAlarma(alarma);
+
+                }
+
             }
         }
 
@@ -158,6 +202,23 @@ public class ControladorReloj {
 
         actualizarListaAlarmas(modeloAlarmas);
 
+    }
+
+    private void abridDialogAlarma() {
+   
+        vista.getDiaAlarma().setVisible(true);
+        vista.getDiaAlarma().setSize(386, 489);
+    
+    
+    }
+
+    private void abridDialogLista() {
+  
+        
+        vista.getDiaLista().setVisible(true);
+        vista.getDiaLista().setSize(386, 489);
+        
+        
     }
 
 }

@@ -1,3 +1,4 @@
+vista\RelojPane$3.class
 com\fernandowirtz\relojdigital\ModeloReloj.class
 vista\RelojPaneBeanInfo.class
 Probar.class
@@ -6,4 +7,5 @@ Probar$1.class
 controlador\ControladorReloj.class
 com\fernandowirtz\relojdigital\Alarma.class
 vista\RelojPane$2.class
+vista\RelojPane$4.class
 vista\RelojPane$1.class

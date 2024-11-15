@@ -7,10 +7,13 @@ package vista;
 import com.fernandowirtz.relojdigital.Alarma;
 import com.fernandowirtz.relojdigital.ModeloReloj;
 import controlador.ControladorReloj;
+import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 
 /**
  *
@@ -23,10 +26,17 @@ public class RelojPane extends javax.swing.JPanel {
      */
     public RelojPane() {
          initComponents();
+         
+         tbtnFecha.setBackground(Color.green);
+         
+         tbtnFormato.setBackground(Color.green);
 
         ModeloReloj modelo=new ModeloReloj();
         
+        
         new ControladorReloj(modelo, this);
+        
+        //añadir fuente 
     }
 
     /**
@@ -38,29 +48,38 @@ public class RelojPane extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        diaAlarma = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtMensaje = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        txtFecha = new javax.swing.JTextField();
         btnAñadirAlarma = new javax.swing.JButton();
+        txtHora = new javax.swing.JTextField();
+        diaLista = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jLAlarmas = new javax.swing.JList<>();
+        jLabel4 = new javax.swing.JLabel();
         btnEliminarAlarma = new javax.swing.JButton();
         lblFecha = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
-        btnFormato = new javax.swing.JButton();
-        btnFecha = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtFecha = new javax.swing.JTextField();
-        txtHora = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
+        tbtnFecha = new javax.swing.JToggleButton();
+        tbtnFormato = new javax.swing.JToggleButton();
+        btnDialogAlarma = new javax.swing.JButton();
+        btnDialogLista = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(0, 0, 102));
-        setForeground(new java.awt.Color(0, 255, 0));
-        setToolTipText("");
+        jPanel1.setBackground(new java.awt.Color(0, 0, 102));
+
+        jLabel1.setForeground(new java.awt.Color(0, 255, 0));
+        jLabel1.setText("Fecha");
+
+        jLabel2.setForeground(new java.awt.Color(0, 255, 0));
+        jLabel2.setText("Hora");
 
         txtMensaje.setBackground(new java.awt.Color(153, 153, 153));
         txtMensaje.setColumns(20);
@@ -68,44 +87,6 @@ public class RelojPane extends javax.swing.JPanel {
         txtMensaje.setRows(5);
         txtMensaje.setName(""); // NOI18N
         jScrollPane1.setViewportView(txtMensaje);
-
-        btnAñadirAlarma.setBackground(new java.awt.Color(153, 153, 153));
-        btnAñadirAlarma.setForeground(new java.awt.Color(0, 255, 0));
-        btnAñadirAlarma.setText("Añadir alarma");
-        btnAñadirAlarma.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAñadirAlarmaActionPerformed(evt);
-            }
-        });
-
-        jLAlarmas.setBackground(new java.awt.Color(153, 153, 153));
-        jLAlarmas.setForeground(new java.awt.Color(0, 255, 0));
-        jScrollPane2.setViewportView(jLAlarmas);
-
-        btnEliminarAlarma.setBackground(new java.awt.Color(153, 153, 153));
-        btnEliminarAlarma.setForeground(new java.awt.Color(0, 255, 0));
-        btnEliminarAlarma.setText("Eliminar Alarma");
-
-        lblFecha.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblFecha.setForeground(new java.awt.Color(0, 204, 0));
-
-        lblHora.setBackground(new java.awt.Color(0, 0, 0));
-        lblHora.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        lblHora.setForeground(new java.awt.Color(0, 255, 0));
-
-        btnFormato.setBackground(new java.awt.Color(153, 153, 153));
-        btnFormato.setForeground(new java.awt.Color(0, 255, 0));
-        btnFormato.setText("Cambiar Formato");
-
-        btnFecha.setBackground(new java.awt.Color(153, 153, 153));
-        btnFecha.setForeground(new java.awt.Color(0, 255, 0));
-        btnFecha.setText("Mostrar fecha");
-
-        jLabel1.setForeground(new java.awt.Color(0, 255, 0));
-        jLabel1.setText("Fecha");
-
-        jLabel2.setForeground(new java.awt.Color(0, 255, 0));
-        jLabel2.setText("Hora");
 
         jLabel3.setForeground(new java.awt.Color(0, 255, 0));
         jLabel3.setText("Mensaje");
@@ -119,16 +100,160 @@ public class RelojPane extends javax.swing.JPanel {
             }
         });
 
+        btnAñadirAlarma.setBackground(new java.awt.Color(153, 153, 153));
+        btnAñadirAlarma.setForeground(new java.awt.Color(0, 255, 0));
+        btnAñadirAlarma.setText("Añadir alarma");
+        btnAñadirAlarma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAñadirAlarmaActionPerformed(evt);
+            }
+        });
+
         txtHora.setBackground(new java.awt.Color(153, 153, 153));
         txtHora.setForeground(new java.awt.Color(0, 255, 0));
         txtHora.setText("HH:mm");
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 381, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(59, 59, 59)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(98, 98, 98)
+                            .addComponent(btnAñadirAlarma, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(90, 90, 90)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(148, 148, 148)
+                            .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(142, 142, 142)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(71, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 327, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(42, 42, 42)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel2))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel3)
+                    .addGap(1, 1, 1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(23, 23, 23)
+                    .addComponent(btnAñadirAlarma)
+                    .addContainerGap(54, Short.MAX_VALUE)))
+        );
+
+        javax.swing.GroupLayout diaAlarmaLayout = new javax.swing.GroupLayout(diaAlarma.getContentPane());
+        diaAlarma.getContentPane().setLayout(diaAlarmaLayout);
+        diaAlarmaLayout.setHorizontalGroup(
+            diaAlarmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        diaAlarmaLayout.setVerticalGroup(
+            diaAlarmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanel2.setBackground(new java.awt.Color(0, 0, 102));
+
+        jLAlarmas.setBackground(new java.awt.Color(153, 153, 153));
+        jLAlarmas.setForeground(new java.awt.Color(0, 255, 0));
+        jScrollPane2.setViewportView(jLAlarmas);
+
         jLabel4.setForeground(new java.awt.Color(0, 255, 0));
         jLabel4.setText("Lista de Alarmas");
 
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        btnEliminarAlarma.setBackground(new java.awt.Color(153, 153, 153));
+        btnEliminarAlarma.setForeground(new java.awt.Color(0, 255, 0));
+        btnEliminarAlarma.setText("Eliminar Alarma");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(71, 71, 71)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnEliminarAlarma, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addContainerGap(71, Short.MAX_VALUE)))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 347, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel4)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(btnEliminarAlarma)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        javax.swing.GroupLayout diaListaLayout = new javax.swing.GroupLayout(diaLista.getContentPane());
+        diaLista.getContentPane().setLayout(diaListaLayout);
+        diaListaLayout.setHorizontalGroup(
+            diaListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        diaListaLayout.setVerticalGroup(
+            diaListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        setBackground(new java.awt.Color(0, 0, 102));
+        setForeground(new java.awt.Color(0, 255, 0));
+        setToolTipText("");
+
+        lblFecha.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblFecha.setForeground(new java.awt.Color(0, 204, 0));
+
+        lblHora.setBackground(new java.awt.Color(0, 0, 0));
+        lblHora.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lblHora.setForeground(new java.awt.Color(0, 255, 0));
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        tbtnFecha.setText("Mostrar Fecha");
+
+        tbtnFormato.setText("Formato 24/12h");
+
+        btnDialogAlarma.setText("Crear alarma");
+        btnDialogAlarma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDialogAlarmaActionPerformed(evt);
+            }
+        });
+
+        btnDialogLista.setText("Lista Alarmas");
+        btnDialogLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDialogListaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -137,94 +262,48 @@ public class RelojPane extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnFecha)
-                                .addGap(32, 32, 32)
-                                .addComponent(btnFormato))
-                            .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(104, 104, 104)
-                                .addComponent(btnAñadirAlarma, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(96, 96, 96)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(43, 43, 43)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(168, 168, 168)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(39, 39, 39)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEliminarAlarma, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(22, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(tbtnFecha)
+                                        .addGap(23, 23, 23)
+                                        .addComponent(tbtnFormato))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(btnDialogAlarma)
+                                .addGap(36, 36, 36)
+                                .addComponent(btnDialogLista)))
+                        .addGap(77, 77, 77))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jSeparator1)
             .addGroup(layout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tbtnFecha)
+                    .addComponent(tbtnFormato))
+                .addGap(49, 49, 49)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(98, 98, 98)
-                                .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(78, 78, 78)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(278, 278, 278)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(btnFormato)
-                                            .addComponent(btnFecha)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel3)
-                                        .addGap(1, 1, 1)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(23, 23, 23)
-                                        .addComponent(btnAñadirAlarma)))))
-                        .addGap(18, 18, 18)
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminarAlarma)))
-                .addContainerGap(91, Short.MAX_VALUE))
+                    .addComponent(btnDialogAlarma)
+                    .addComponent(btnDialogLista))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -236,24 +315,37 @@ public class RelojPane extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFechaActionPerformed
 
+    private void btnDialogAlarmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDialogAlarmaActionPerformed
+        
+    }//GEN-LAST:event_btnDialogAlarmaActionPerformed
+
+    private void btnDialogListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDialogListaActionPerformed
+      
+    }//GEN-LAST:event_btnDialogListaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAñadirAlarma;
+    private javax.swing.JButton btnDialogAlarma;
+    private javax.swing.JButton btnDialogLista;
     private javax.swing.JButton btnEliminarAlarma;
-    private javax.swing.JButton btnFecha;
-    private javax.swing.JButton btnFormato;
+    private javax.swing.JDialog diaAlarma;
+    private javax.swing.JDialog diaLista;
     private javax.swing.JList<Alarma> jLAlarmas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblHora;
+    private javax.swing.JToggleButton tbtnFecha;
+    private javax.swing.JToggleButton tbtnFormato;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtHora;
     private javax.swing.JTextArea txtMensaje;
@@ -271,16 +363,21 @@ public void actualizarHora(String hora) {
         lblFecha.setText(fecha);
 
     }
+    
+    public void setFuente(){
+        
+    }
+
+    public JToggleButton getTbtnFecha() {
+        return tbtnFecha;
+    }
+
+    public JToggleButton getTbtnFormato() {
+        return tbtnFormato;
+    }
 
     
-    //probar toggle buttons cMBIO DE COLORES
-    public JButton getBtnFecha() {
-        return btnFecha;
-    }
-
-    public JButton getBtnFormato() {
-        return btnFormato;
-    }
+   
     
     
     public JButton getBtnAñadirAlarma(){
@@ -307,13 +404,23 @@ public void actualizarHora(String hora) {
         return btnEliminarAlarma;
     }
 
-    public void setBtnFecha(JButton btnFecha) {
-        this.btnFecha = btnFecha;
+    public JButton getBtnDialogAlarma() {
+        return btnDialogAlarma;
     }
 
-    public void setBtnFormato(JButton btnFormato) {
-        this.btnFormato = btnFormato;
+    public JButton getBtnDialogLista() {
+        return btnDialogLista;
     }
+
+    public JDialog getDiaAlarma() {
+        return diaAlarma;
+    }
+
+    public JDialog getDiaLista() {
+        return diaLista;
+    }
+
     
+  
 
 }

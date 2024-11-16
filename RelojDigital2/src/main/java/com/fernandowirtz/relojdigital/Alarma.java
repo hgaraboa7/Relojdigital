@@ -4,6 +4,7 @@
  */
 package com.fernandowirtz.relojdigital;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.swing.DefaultListModel;
 
@@ -11,7 +12,7 @@ import javax.swing.DefaultListModel;
  *
  * @author hecto
  */
-public class Alarma {
+public class Alarma implements Serializable {
     
     public LocalDateTime momento;
     
@@ -28,6 +29,8 @@ public class Alarma {
         
         
     }
+
+    
 
     public LocalDateTime getMomento() {
         return momento;

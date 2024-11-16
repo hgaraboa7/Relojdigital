@@ -8,6 +8,7 @@ import com.fernandowirtz.relojdigital.Alarma;
 import com.fernandowirtz.relojdigital.ModeloReloj;
 import controlador.ControladorReloj;
 import java.awt.Color;
+import java.util.prefs.Preferences;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JList;
@@ -24,17 +25,40 @@ public class RelojPane extends javax.swing.JPanel {
     /**
      * Creates new form RelojPane
      */
-    public RelojPane() {
-         initComponents();
-         
-         tbtnFecha.setBackground(Color.green);
-         
-         tbtnFormato.setBackground(Color.green);
+    ModeloReloj modelo;
 
-        ModeloReloj modelo=new ModeloReloj();
-        
-        
+    public RelojPane() {
+        initComponents();
+
+       
+
+        modelo = new ModeloReloj();
+
         new ControladorReloj(modelo, this);
+        
+        jLabel1.setFont(modelo.getFuente());
+        jLabel2.setFont(modelo.getFuente());
+        jLabel3.setFont(modelo.getFuente());
+        jLabel4.setFont(modelo.getFuente());
+
+        if(modelo.isFechaVisible()){
+            tbtnFecha.setBackground(Color.green);
+            tbtnFecha.setSelected(false);
+        }else{
+            tbtnFecha.setBackground(Color.red);
+            tbtnFecha.setSelected(true);
+        }
+        if(modelo.isFormato24h()){
+            tbtnFormato.setBackground(Color.green);
+            tbtnFormato.setSelected(false);
+        }else{
+            tbtnFormato.setBackground(Color.red);
+            tbtnFormato.setSelected(true);
+        }
+        
+
+        
+  
         
         //añadir fuente 
     }
@@ -92,7 +116,7 @@ public class RelojPane extends javax.swing.JPanel {
         jLabel3.setText("Mensaje");
 
         txtFecha.setBackground(new java.awt.Color(153, 153, 153));
-        txtFecha.setForeground(new java.awt.Color(0, 255, 0));
+        txtFecha.setForeground(new java.awt.Color(0, 0, 0));
         txtFecha.setText("yyyy/MM/dd");
         txtFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,7 +125,7 @@ public class RelojPane extends javax.swing.JPanel {
         });
 
         btnAñadirAlarma.setBackground(new java.awt.Color(153, 153, 153));
-        btnAñadirAlarma.setForeground(new java.awt.Color(0, 255, 0));
+        btnAñadirAlarma.setForeground(new java.awt.Color(0, 0, 0));
         btnAñadirAlarma.setText("Añadir alarma");
         btnAñadirAlarma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +134,7 @@ public class RelojPane extends javax.swing.JPanel {
         });
 
         txtHora.setBackground(new java.awt.Color(153, 153, 153));
-        txtHora.setForeground(new java.awt.Color(0, 255, 0));
+        txtHora.setForeground(new java.awt.Color(0, 0, 0));
         txtHora.setText("HH:mm");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -182,7 +206,7 @@ public class RelojPane extends javax.swing.JPanel {
         jLabel4.setText("Lista de Alarmas");
 
         btnEliminarAlarma.setBackground(new java.awt.Color(153, 153, 153));
-        btnEliminarAlarma.setForeground(new java.awt.Color(0, 255, 0));
+        btnEliminarAlarma.setForeground(new java.awt.Color(0, 0, 0));
         btnEliminarAlarma.setText("Eliminar Alarma");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -262,19 +286,16 @@ public class RelojPane extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(43, 43, 43)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(tbtnFecha)
-                                        .addGap(23, 23, 23)
-                                        .addComponent(tbtnFormato))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(tbtnFecha)
+                                .addGap(23, 23, 23)
+                                .addComponent(tbtnFormato))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(43, 43, 43)
                                 .addComponent(btnDialogAlarma)
                                 .addGap(36, 36, 36)
                                 .addComponent(btnDialogLista)))
@@ -316,11 +337,11 @@ public class RelojPane extends javax.swing.JPanel {
     }//GEN-LAST:event_txtFechaActionPerformed
 
     private void btnDialogAlarmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDialogAlarmaActionPerformed
-        
+
     }//GEN-LAST:event_btnDialogAlarmaActionPerformed
 
     private void btnDialogListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDialogListaActionPerformed
-      
+
     }//GEN-LAST:event_btnDialogListaActionPerformed
 
 
@@ -351,76 +372,76 @@ public class RelojPane extends javax.swing.JPanel {
     private javax.swing.JTextArea txtMensaje;
     // End of variables declaration//GEN-END:variables
 
-
-public void actualizarHora(String hora) {
-
+    public void actualizarHora(String hora) {
+        lblHora.setFont(modelo.getFuente2());
         lblHora.setText(hora);
 
     }
 
     public void actualizarFecha(String fecha) {
-
+        lblFecha.setFont(modelo.getFuente());
         lblFecha.setText(fecha);
 
     }
-    
-    public void setFuente(){
-        
-    }
 
     public JToggleButton getTbtnFecha() {
+        tbtnFecha.setFont(modelo.getFuente());
         return tbtnFecha;
     }
 
     public JToggleButton getTbtnFormato() {
+        tbtnFormato.setFont(modelo.getFuente());
         return tbtnFormato;
     }
 
-    
-   
-    
-    
-    public JButton getBtnAñadirAlarma(){
+    public JButton getBtnAñadirAlarma() {
+        btnAñadirAlarma.setFont(modelo.getFuente());
         return btnAñadirAlarma;
     }
 
     public JTextField getTxtFecha() {
+        txtFecha.setFont(modelo.getFuente());
         return txtFecha;
     }
 
     public JTextField getTxtHora() {
+        txtHora.setFont(modelo.getFuente());
         return txtHora;
     }
 
     public JTextArea getTxtMensaje() {
+txtMensaje.setFont(modelo.getFuente());
         return txtMensaje;
     }
 
     public JList<Alarma> getjLAlarmas() {
+        jLAlarmas.setFont(modelo.getFuente());
         return jLAlarmas;
     }
 
     public JButton getBtnEliminarAlarma() {
+        btnEliminarAlarma.setFont(modelo.getFuente());
         return btnEliminarAlarma;
     }
 
     public JButton getBtnDialogAlarma() {
+        btnDialogAlarma.setFont(modelo.getFuente());
+        
         return btnDialogAlarma;
     }
 
     public JButton getBtnDialogLista() {
+        btnDialogLista.setFont(modelo.getFuente());
         return btnDialogLista;
     }
 
     public JDialog getDiaAlarma() {
+        
         return diaAlarma;
     }
 
     public JDialog getDiaLista() {
         return diaLista;
     }
-
-    
-  
 
 }

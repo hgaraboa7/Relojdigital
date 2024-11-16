@@ -49,6 +49,8 @@ public class ControladorReloj {
         
         vista.getBtnDialogLista().addActionListener(e-> abridDialogLista());
 
+        actualizarListaAlarmas(modelo.getModeloAlarmas());
+        
         iniciarReloj();
 
     }

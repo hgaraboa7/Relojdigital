@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.Preferences;
 import javax.swing.DefaultListModel;
 
 /**
@@ -21,13 +22,27 @@ public class ModeloReloj {
 
     public boolean fechaVisible = true;
 
-    public Font fuente = new Font("Arial", Font.PLAIN, 20);
+    public Font fuente2 = new Font("Arial", Font.PLAIN, 35);
 
+    public Font fuente = new Font("Arial", Font.PLAIN, 12);
+
+    
     public Color colorFondo = Color.BLACK;
+    
+    private List<Alarma> alarmas=new ArrayList<>();
 
     static DefaultListModel<Alarma> modeloAlarmas = new DefaultListModel();
 
+    private Preferences preferencias;
+    
+    private Serializer serializador;
+
     public ModeloReloj() {
+
+        this.preferencias = Preferences.userNodeForPackage(ModeloReloj.class);
+        cargarPreferencias();
+        cargarAlarmas();
+
     }
 
     public LocalDateTime getFechaActual() {
@@ -40,7 +55,10 @@ public class ModeloReloj {
     }
 
     public void setFormato24h(boolean formato24h) {
+        System.out.println(formato24h);
+        this.preferencias.putBoolean("formato24h", formato24h);
         this.formato24h = formato24h;
+        
     }
 
     public boolean isFechaVisible() {
@@ -48,11 +66,17 @@ public class ModeloReloj {
     }
 
     public void setFechaVisible(boolean fechaVisible) {
+        System.out.println(fechaVisible);
+        this.preferencias.putBoolean("formatoFecha", fechaVisible);
         this.fechaVisible = fechaVisible;
     }
 
     public Font getFuente() {
         return fuente;
+    }
+
+    public Font getFuente2() {
+        return fuente2;
     }
 
     public Color getColorFondo() {
@@ -65,6 +89,10 @@ public class ModeloReloj {
 
             modeloAlarmas.addElement(alarma);
             
+            alarmas.add(alarma);
+                        
+            serializador.save("info.ser", new ArrayList<>(alarmas));
+
         } else {
             System.out.println("Alarma en fecha/hora ya pasada");
         }
@@ -73,6 +101,10 @@ public class ModeloReloj {
     public void eliminarAlarma(Alarma alarma) {
 
         modeloAlarmas.removeElement(alarma);
+        alarmas.remove(alarma);
+        
+         serializador.save("info.ser", new ArrayList<>(alarmas));
+        
 
     }
 
@@ -80,4 +112,26 @@ public class ModeloReloj {
         return modeloAlarmas;
     }
 
+    public void cargarPreferencias() {
+
+     
+        this.formato24h = preferencias.getBoolean("formato24h", true);
+        this.fechaVisible = preferencias.getBoolean("formatoFecha", true);
+
+    }
+    
+    public void cargarAlarmas(){
+        
+        List<Alarma>cargadas=serializador.read("info.ser", ArrayList.class);
+        if(cargadas!=null){
+            alarmas.clear();
+            alarmas.addAll(cargadas);
+            modeloAlarmas.clear();
+            alarmas.forEach(modeloAlarmas::addElement);
+        }
+        
+        
+    }
+    
+    
 }

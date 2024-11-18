@@ -49,6 +49,8 @@ public class Alarma implements Serializable {
     
     public boolean sonarAlarma(LocalDateTime ahora){
         
+        //sonar es cambio de propiedades
+        
        return ahora.isAfter(momento) || ahora.isEqual(momento);
         
         

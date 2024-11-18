@@ -26,15 +26,16 @@ public class ModeloReloj {
 
     public Font fuente = new Font("Arial", Font.PLAIN, 12);
 
-    
     public Color colorFondo = Color.BLACK;
-    
-    private List<Alarma> alarmas=new ArrayList<>();
+
+    private List<Alarma> alarmas = new ArrayList<>();
+
+    private List<Alarmalistener> listeners = new ArrayList<>();
 
     static DefaultListModel<Alarma> modeloAlarmas = new DefaultListModel();
 
     private Preferences preferencias;
-    
+
     private Serializer serializador;
 
     public ModeloReloj() {
@@ -58,7 +59,7 @@ public class ModeloReloj {
         System.out.println(formato24h);
         this.preferencias.putBoolean("formato24h", formato24h);
         this.formato24h = formato24h;
-        
+
     }
 
     public boolean isFechaVisible() {
@@ -88,9 +89,9 @@ public class ModeloReloj {
         if (alarma.futura()) {
 
             modeloAlarmas.addElement(alarma);
-            
+
             alarmas.add(alarma);
-                        
+
             serializador.save("info.ser", new ArrayList<>(alarmas));
 
         } else {
@@ -102,9 +103,8 @@ public class ModeloReloj {
 
         modeloAlarmas.removeElement(alarma);
         alarmas.remove(alarma);
-        
-         serializador.save("info.ser", new ArrayList<>(alarmas));
-        
+
+        serializador.save("info.ser", new ArrayList<>(alarmas));
 
     }
 
@@ -114,24 +114,35 @@ public class ModeloReloj {
 
     public void cargarPreferencias() {
 
-     
         this.formato24h = preferencias.getBoolean("formato24h", true);
         this.fechaVisible = preferencias.getBoolean("formatoFecha", true);
 
     }
-    
-    public void cargarAlarmas(){
-        
-        List<Alarma>cargadas=serializador.read("info.ser", ArrayList.class);
-        if(cargadas!=null){
-            alarmas.clear();
-            alarmas.addAll(cargadas);
-            modeloAlarmas.clear();
-            alarmas.forEach(modeloAlarmas::addElement);
+
+    private void notificarAlarmaActivada(Alarma alarma) {
+        for (Alarmalistener listener : listeners) {
+            listener.alarmaActivada(alarma);
         }
-        
-        
     }
-    
-    
+
+    public void addAlarmaListener(Alarmalistener listener) {
+        listeners.add(listener);
+    }
+
+    public void cargarAlarmas() {
+        List<Alarma> cargadas = serializador.read("info.ser", ArrayList.class);
+        if (cargadas != null) {
+            alarmas.clear();
+            for (Alarma alarma : cargadas) {
+                if (alarma.sonarAlarma(LocalDateTime.now())) {
+                    notificarAlarmaActivada(alarma);
+                } else {
+                    alarmas.add(alarma);
+                    modeloAlarmas.addElement(alarma);
+                }
+            }
+            serializador.save("info.ser", new ArrayList<>(alarmas));
+        }
+    }
+
 }

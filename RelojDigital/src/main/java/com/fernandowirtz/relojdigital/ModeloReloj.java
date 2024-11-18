@@ -4,8 +4,10 @@
  */
 package com.fernandowirtz.relojdigital;
 
+import controlador.ControladorReloj;
 import java.awt.Color;
 import java.awt.Font;
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,7 @@ public class ModeloReloj {
 
     private List<Alarma> alarmas = new ArrayList<>();
 
-    private List<Alarmalistener> listeners = new ArrayList<>();
+    private List<Alarmalistener > listeners = new ArrayList<>();
 
     static DefaultListModel<Alarma> modeloAlarmas = new DefaultListModel();
 
@@ -103,6 +105,7 @@ public class ModeloReloj {
 
         modeloAlarmas.removeElement(alarma);
         alarmas.remove(alarma);
+        notificarAlarmaborrada(alarma);
 
         serializador.save("info.ser", new ArrayList<>(alarmas));
 
@@ -119,24 +122,34 @@ public class ModeloReloj {
 
     }
 
+    
+    //funciona incorrectamente
     private void notificarAlarmaActivada(Alarma alarma) {
-        for (Alarmalistener listener : listeners) {
+        for (Alarmalistener  listener : listeners) {
             listener.alarmaActivada(alarma);
         }
     }
+     private void notificarAlarmaborrada(Alarma alarma) {
+        for (Alarmalistener  listener : listeners) {
+            listener.alarmaBorrada(alarma);
+        }
+    }
 
-    public void addAlarmaListener(Alarmalistener listener) {
+    public void addAlarmaListener(Alarmalistener  listener) {
         listeners.add(listener);
     }
 
-    public void cargarAlarmas() {
+    public void cargarAlarmas()  {
+        
+        
+        
         List<Alarma> cargadas = serializador.read("info.ser", ArrayList.class);
         if (cargadas != null) {
             alarmas.clear();
             for (Alarma alarma : cargadas) {
                 if (alarma.sonarAlarma(LocalDateTime.now())) {
                     System.out.println("Alarma vencida detectada: " + alarma.getMensaje());
-                    notificarAlarmaActivada(alarma);
+                    notificarAlarmaActivada(alarma); //funciona incorrectamente
 
                 } else {
                     alarmas.add(alarma);
@@ -145,6 +158,7 @@ public class ModeloReloj {
             }
             serializador.save("info.ser", new ArrayList<>(alarmas));
         }
+        
     }
 
 }

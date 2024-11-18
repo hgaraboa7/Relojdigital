@@ -107,7 +107,7 @@ public class RelojPane extends javax.swing.JPanel {
 
         txtMensaje.setBackground(new java.awt.Color(153, 153, 153));
         txtMensaje.setColumns(20);
-        txtMensaje.setForeground(new java.awt.Color(0, 255, 0));
+        txtMensaje.setForeground(new java.awt.Color(0, 0, 0));
         txtMensaje.setRows(5);
         txtMensaje.setName(""); // NOI18N
         jScrollPane1.setViewportView(txtMensaje);
@@ -199,7 +199,7 @@ public class RelojPane extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(0, 0, 102));
 
         jLAlarmas.setBackground(new java.awt.Color(153, 153, 153));
-        jLAlarmas.setForeground(new java.awt.Color(0, 255, 0));
+        jLAlarmas.setForeground(new java.awt.Color(0, 0, 0));
         jScrollPane2.setViewportView(jLAlarmas);
 
         jLabel4.setForeground(new java.awt.Color(0, 255, 0));

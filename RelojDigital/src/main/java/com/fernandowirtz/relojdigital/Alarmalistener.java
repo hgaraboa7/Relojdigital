@@ -11,4 +11,5 @@ package com.fernandowirtz.relojdigital;
 
 public interface Alarmalistener {
     void alarmaActivada(Alarma alarma);
+    void alarmaBorrada(Alarma alarma);
 }

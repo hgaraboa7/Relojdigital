@@ -48,9 +48,11 @@ public class ControladorReloj implements Alarmalistener {
 
         vista.getBtnDialogLista().addActionListener(e -> abridDialogLista());
 
-        actualizarListaAlarmas(modelo.getModeloAlarmas());
+        
 
         modelo.addAlarmaListener(this);
+        
+        actualizarListaAlarmas(modelo.getModeloAlarmas());
 
         iniciarReloj();
 
@@ -218,6 +220,18 @@ public class ControladorReloj implements Alarmalistener {
                 "Alarma",
                 JOptionPane.INFORMATION_MESSAGE
         );
+    }
+
+    @Override
+    public void alarmaBorrada(Alarma alarma) {
+       JOptionPane.showMessageDialog(
+            vista,
+                "¡Alarma borrada! " + alarma.getMensaje(),
+                "Alarma",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    
+    
     }
 
 }

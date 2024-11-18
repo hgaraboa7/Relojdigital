@@ -5,6 +5,7 @@
 package com.fernandowirtz.relojdigital;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -38,6 +39,10 @@ public class Serializer {
             } finally {
                 fis.close();
             }
+        } catch (FileNotFoundException ex1) {
+
+            System.out.println("No hay alarmas guardadas");
+
         } catch (IOException | ClassNotFoundException | ClassCastException e) {
             e.printStackTrace();
         }

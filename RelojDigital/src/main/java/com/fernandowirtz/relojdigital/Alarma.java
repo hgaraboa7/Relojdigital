@@ -49,7 +49,7 @@ public class Alarma implements Serializable {
     @Override
     public String toString() {
 
-        return "Alarma " + "momento= " + momento.toLocalDate() + " " + momento.toLocalTime() + ", mensaje=" + mensaje + '.';
+        return "Alarma " + "momento= " + momento.toLocalDate() + " y hora " + momento.toLocalTime() +", mensaje=" + mensaje + '.';
     }
 
 }
